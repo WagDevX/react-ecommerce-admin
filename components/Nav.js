@@ -2,12 +2,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Nav() {
-    const inactiveLink = "flex gap-1 p-1";
+    const inactiveLink = "flex gap-1 p-1 hover:bg-blue-700 rounded-l transition duration-300 ease-in";
     const activeLink = inactiveLink + ' bg-white text-blue-900 rounded-l-lg';
     const router =  useRouter();
     const {pathname} = router;
   return (
-    <aside className="text-white p-4 pr-0">
+    <aside className="text-white p-4 pr-0 rou">
       <Link href={"/"} className="flex gap-1 mb-4 mr-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ export default function Nav() {
         </svg>
         <span className="">EcoomerceAdmin</span>
       </Link>
-      <nav className="flex flex-col gap-2">
+      <nav className="flex flex-col gap-2 ">
         <Link href={"/"} className={pathname === '/' ? activeLink: inactiveLink}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
