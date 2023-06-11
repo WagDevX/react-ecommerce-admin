@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 export default function Nav() {
   const inactiveLink =
-    "flex gap-1 p-1 hover:bg-blue-700 rounded-l transition duration-300 ease-in";
+    "flex gap-1 p-1 hover:bg-blue-700 rounded-l-lg transition duration-300 ease-in";
   const activeLink = inactiveLink + " bg-white text-blue-900 rounded-l-lg";
   const router = useRouter();
   const { pathname } = router;
