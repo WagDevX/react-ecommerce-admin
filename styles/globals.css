@@ -62,3 +62,11 @@ table.basic a:hover {
 .btn-default {
     @apply bg-gray-500 text-white hover:bg-gray-400 transition duration-300 ease-in;
 }
+
+.loader {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    margin-top: 6rem;
+    transform: translate(-50%, -50%);
+}

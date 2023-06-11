@@ -1,13 +1,16 @@
 import Layout from "@/components/Layout";
+import Spinner from "@/components/Spinner";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
+  const [isLoaded, setIsloaded] = useState(false);
   useEffect(() => {
     axios.get("/api/products").then((response) => {
       setProducts(response.data);
+      setIsloaded(true);
     });
   }, []);
   return (
@@ -69,6 +72,14 @@ export default function Products() {
           ))}
         </tbody>
       </table>
+      <div className="loader">
+        {!isLoaded && (
+          <span className="h-24 flex gap-2">
+            <Spinner />
+          </span>
+        )}
+
+        </div>
     </Layout>
   );
 }
