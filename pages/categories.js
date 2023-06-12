@@ -202,7 +202,6 @@ export default function Categories() {
       </form>
       {!editedCategory &&  (
         <table className="basic mt-3">
-          
         <thead>
           <tr>
             <td>Category name</td>
@@ -219,7 +218,7 @@ export default function Categories() {
                 <td>
                   <button
                     onClick={() => editCategory(category)}
-                    className="btn-primary inline-flex mr-1 items-center"
+                    className="btn-default inline-flex mr-1 items-center mb-1 mt-1"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -239,7 +238,7 @@ export default function Categories() {
                   </button>
                   <button
                     onClick={() => deleteCategory(category)}
-                    className="btn-primary inline-flex items-center"
+                    className="btn-red inline-flex items-center"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -266,7 +265,6 @@ export default function Categories() {
             <Spinner />
           </span>
         )}
-
         </div>
         </tbody>
       </table>
