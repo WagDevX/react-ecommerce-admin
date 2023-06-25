@@ -15,10 +15,7 @@ export default function Products() {
   }, []);
   return (
     <Layout>
-      <Link
-        className="btn-primary"
-        href="/products/new"
-      >
+      <Link className="btn-primary" href="/products/new">
         Add new product
       </Link>
       <table className="basic mt-3">
@@ -29,11 +26,21 @@ export default function Products() {
           </tr>
         </thead>
         <tbody>
+        {!isLoaded && 
+          <tr>
+            <td colSpan={2}>
+              <div className="py-4"><Spinner fulllWidth={true}/></div>
+            </td>
+          </tr>
+        }
           {products.map((product) => (
             <tr key={product._id}>
               <td>{product.title}</td>
               <td>
-                <Link className="btn-default" href={"/products/edit/" + product._id}>
+                <Link
+                  className="btn-default"
+                  href={"/products/edit/" + product._id}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -50,7 +57,10 @@ export default function Products() {
                   </svg>
                   Edit
                 </Link>
-                <Link className="btn-red" href={"/products/delete/" + product._id}>
+                <Link
+                  className="btn-red"
+                  href={"/products/delete/" + product._id}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -72,14 +82,6 @@ export default function Products() {
           ))}
         </tbody>
       </table>
-      <div className="loader">
-        {!isLoaded && (
-          <span className="h-24 flex gap-2">
-            <Spinner />
-          </span>
-        )}
-
-        </div>
     </Layout>
   );
 }
