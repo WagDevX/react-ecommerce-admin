@@ -96,7 +96,7 @@ export default function AdminsPage() {
           <tr>
             <th className="text-left">Admin google Email</th>
             <th className="text-left">Date</th>
-            <th>actions</th>
+            <th className="text-left">actions</th>
           </tr>
         </thead>
         <tbody>
