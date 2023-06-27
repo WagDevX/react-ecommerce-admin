@@ -111,7 +111,7 @@ export default function ProductForm({
           <Spinner fulllWidth={true} />
         )}
         {propertiesToFill.length > 0 && propertiesToFill.map(p => (
-          <div className="">
+          <div key={p.name} className="">
             <label>{p.name}</label>
             <div>
             <select value={productProperties[p.name]}
@@ -119,7 +119,7 @@ export default function ProductForm({
             setProductProperty(p.name, ev.target.value)
             }>
               {p.values.map(v => (
-                <option value={v}>{v}</option>
+                <option key={v} value={v}>{v}</option>
               ))}
             </select>
             </div>

@@ -140,7 +140,7 @@ export default function Categories() {
           </button>
           {properties.length > 0 &&
             properties.map((property, index) => (
-              <div className="flex gap-1 mb-2">
+              <div key={index} className="flex gap-1 mb-2">
                 <input
                   type="text"
                   className="mb-0"
@@ -223,7 +223,7 @@ export default function Categories() {
             )}
             {categories.length > 0 &&
               categories.map((category) => (
-                <tr key={category.name}>
+                <tr key={category._id}>
                   <td>{category.name}</td>
                   <td>{category?.parent?.name}</td>
                   <td>

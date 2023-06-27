@@ -61,7 +61,7 @@ export default function Settings() {
           >
             {products.length > 0 &&
               products.map((product) => (
-                <option value={product._id}>{product.title}</option>
+                <option key={product._id} value={product._id}>{product.title}</option>
               ))}
           </select>
           <label>Shipping price (in BRL)</label>
