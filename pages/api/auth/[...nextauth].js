@@ -9,6 +9,7 @@ async function isAdminEmail(email) {
 }
 
 export const authOptions = {
+  secret: process.ev.SECRET,
   providers: [
     // OAuth authentication providers...
     GoogleProvider({
