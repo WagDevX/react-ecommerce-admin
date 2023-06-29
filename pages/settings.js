@@ -11,7 +11,8 @@ export default function Settings() {
   const [isLoading, setIsLoading] = useState(false);
   const [featuredProductId, setFeaturedProductId] = useState("");
   const [shippingFee, setShippingFee] = useState("");
-
+  const [bannerFront, setBannerFront] = useState("https://wagner-nextjs-ecommerce.s3.sa-east-1.amazonaws.com/8865748-ai+(2).png");
+  const [isUploading, setIsUploading] = useState(false);
   useEffect(() => {
     setIsLoading(true);
     fetchAll().then(() => {
@@ -29,6 +30,9 @@ export default function Settings() {
     await axios.get("/api/settings?name=shippingFee").then((res) => {
       setShippingFee(res.data.value);
     });
+    await axios.get("/api/settings?name=bannerFront").then((res) => {
+      setBannerFront(res.data.value);
+    })
   }
 
   async function saveSettings() {
@@ -41,11 +45,29 @@ export default function Settings() {
       name: "shippingFee",
       value: shippingFee,
     });
+    await axios.put("/api/settings", {
+      name: "bannerFront",
+      value: bannerFront,
+    })
     setIsLoading(false);
     await MySwal.fire({
       title: "Settings saved!",
       icon: "success",
     });
+  }
+  async function uploadeImages (ev) {
+    setIsUploading(true);
+    const files = ev.target?.files;
+    if (files.length > 0) {
+
+      const data = new FormData();
+      for (const file of files) {
+        data.append('file', file);
+      }
+      const res = await axios.post('/api/upload', data);
+      setBannerFront(res.data.links)
+      setIsUploading(false);
+    }
   }
 
   return (
@@ -71,7 +93,13 @@ export default function Settings() {
             type="number"
           />
           <div>
-            <label>Front page Banner</label>
+            <label>Front page Banner (size recommended: 1100 x 300 px)</label>
+            <div className="mb-2 flex flex-wrap gap-2">
+            {!!bannerFront && (
+            <div key={bannerFront} className="h-24 bg-white p-1 shadow-sm rounded-md border border-gray-200">
+              <img src={bannerFront} className="rounded-lg"></img>
+            </div>
+            )}
             <label className=" cursor-pointer w-24 h-24 text-center flex-col flex items-center justify-center text-sm gap-1 text-primary rounded-lg bg-white hover:bg-gray-300 transition duration-300 ease-in shadow-sm border border-gray-200">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -88,8 +116,9 @@ export default function Settings() {
                 />
               </svg>
               Add image
-              <input type="file" onChange={() => {}} className="hidden"></input>
+              <input type="file" onChange={uploadeImages} className="hidden"></input>
             </label>
+            </div>
             <button onClick={saveSettings} className="btn-primary mt-3">
               Save settings
             </button>
